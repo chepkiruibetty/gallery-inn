@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for image in object_list %}
+<div class="post-entry">
+<h2><a href="">{{ image.name }}</a></h2>
+<p>{{ image.description }}</p>
+</div>
+{% endfor %}
+{% endblock content %}
