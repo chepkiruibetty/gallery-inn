@@ -7,6 +7,21 @@ class Images(models.Model):
     image_location = models.ForeignKey('Location', on_delete=models.CASCADE,)
     image_category = models.ForeignKey('Category', on_delete=models.CASCADE,)
     
+    @classmethod 
+    def get_all_images(cls):
+        images=cls.objects.all()
+        return images
+    
+    @classmethod
+    def save_image(self):
+        self.save()
+        
+    @classmethod
+    def delete_image(self):
+        self.delete()
+    
+    
+    
     def __str__(self):
         return self.name
     
@@ -21,6 +36,17 @@ class Location(models.Model):
     )
     locs = models.CharField(max_length = 255, choices = locations)
     
+    @classmethod
+    def save_location(self):
+        self.save()
+    
+    @classmethod 
+    def delete_location(self):
+        self.delete()
+        
+        
+    
+    
     def __str__(self):
         return f"{self.locs}"
 
@@ -34,6 +60,14 @@ class Category(models.Model):
         ('People','People')
     )
     cate = models.CharField(max_length = 255, choices = categories)
+    
+    @classmethod
+    def save_category(self):
+        self.save()
+        
+    @classmethod
+    def delete_category(self):
+        self.delete()
     
     def __str__(self):
         return f"{self.cate}"
