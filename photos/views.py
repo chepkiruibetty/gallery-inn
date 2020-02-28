@@ -23,3 +23,21 @@ def search_image(request):
     else:
         message = 'You havent searched yet'
         return render(request, 'search.html', {"message": message})
+    
+    
+def categories(request):
+    categories = Image.get_all_images()
+    return render(request, 'categories.html', {"categories": categories})
+
+
+def search_image_by_category(request,locs):
+    my_images = Image.get_image_by_location(locs)
+    print(my_images)
+    return render(request, 'location.html', {"my_images": my_images})
+
+
+def single_image(request,image_id):
+    image=Image.objects.get(id = image_id)
+    return render(request, 'image.html',{"image":image})
+
+
