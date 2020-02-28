@@ -1,7 +1,9 @@
 from django.urls import path
 
-from .views import PhotosListView
+from . import views
 
 urlpatterns=[
-    path('',PhotosListView.as_view(),name='home'),
+    path('',views.home,name='home'),
+    path('',views.search_image,name='search_image')
+    
 ]
