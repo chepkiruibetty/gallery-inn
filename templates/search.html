@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{%extends 'base.html'%}
 {% block content %}
 <div class="container">
 
@@ -14,7 +14,7 @@
     <div class="row">
 
         {% if images %}
-        {% for images in images %}
+        {% for image in image %}
         <div class="col-sm-6 col-md-3">
             <h1>{{image.name}}</h1>
         </div>
@@ -22,5 +22,4 @@
         {% endif %}
     </div>
 </div>
-
-{% endblock content %}
+{% endblock %}
