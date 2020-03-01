@@ -1,10 +1,14 @@
 # Gallery-Inn
 
 ## Author
- CHepkirui Betty
+ Chepkirui Betty
+
 ### Description  
 This is an application that enables users to view different categories of images per locations and also able to copy the link and share it to other friends
 
+### Deployed link
+
+ - https://kiprutgalley.herokuapp.com/
 
 ### Setup and Installation  
 To get the project .......  
