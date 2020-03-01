@@ -1,43 +1,32 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView,TemplateView
+from django.db.models import Q
 
-from .models import Images,Category,Location
+
+from .models import Images
 
 # Create your views here.
 def home(request):
     images= Images.objects.all()
     return render(request, "home.html", {"images":images})
 
-def search_image(request):
-    categories=Category.objects.all()
-    locations=Location.objects.all()
-    if 'images' in request.GET and request.GET['image']:
-        search_item =request.GET.get('image')
-        found_results=Image.get_image_by_cate(search_item)
-        message=f"{search_item}"
-        print(found_results)
-        
-        return render(request, 'search.html',
-                    {'found_results': found_results, 'message': message, 'categories': categories,
-                    "locations": locations})
-    else:
-        message = 'You havent searched yet'
-        return render(request, 'search.html', {"message": message})
+
+
+class SearchResultsListView(ListView):
+    model = Images
+    context_object_name = 'images_list'
+    template_name = 'search.html'
     
+
+    def get_queryset(self): 
+        query = self.request.GET.get('q')
+        if Images.objects.filter(Q(image_category=query)):
+            return Images.objects.filter(Q(image_category=query))
+
+def search_location(request,location):
+    images_by_location = Image.filter_by_location(location)
     
-def categories(request):
-    categories = Image.get_all_images()
-    return render(request, 'categories.html', {"categories": categories})
+    return render(request,'location.html', {"images":images_by_location})
 
-
-def search_image_by_category(request,locs):
-    my_images = Image.get_image_by_location(locs)
-    print(my_images)
-    return render(request, 'location.html', {"my_images": my_images})
-
-
-def single_image(request,image_id):
-    image=Image.objects.get(id = image_id)
-    return render(request, 'image.html',{"image":image})
 
 
