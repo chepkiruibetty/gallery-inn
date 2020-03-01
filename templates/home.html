@@ -1,58 +1,80 @@
 {% extends 'base.html' %}
 {% block content %}
+<header>
+    <div class=" container header-content">
+        <h1>GALLERY INN</h1>
+        <h3>“Everywhere you walk, every place you go is full of art, explicit or hidden! <br>If you can see them,
+            you will
+            be the richest art collector<br> and your memory will be the richest art gallery!” </h3>
 
-<div class="container">
-<div class="row">
-    {% for image in images %}
-    <div class="col-sm-12 col-md-6 col-lg-3 ">
+        <!-- Adding a search form  -->
 
-        <img src="{{image.image.url}}" class="img-fluid img-thumbnail img-responsive" alt="image" data-toggle="modal"
-            data-target="#{{image.name}}{{image.id}}">
+        <form class="navbar-form" role="search" action="{% url 'search_results' %}" METHOD="GET">
+
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Item" name="image">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit">Go
+                    </button>
+                </div>
+            </div>
+
+        </form>
     </div>
+</header>
+<br>
+<div class="container">
+    <div class="row">
+        {% for image in images %}
+        <div class="col-sm-12 col-md-6 col-lg-3 ">
+
+            <img src="{{image.image.url}}" class="img-fluid img-thumbnail img-responsive" alt="image"
+                data-toggle="modal" data-target="#{{image.name}}{{image.id}}">
+        </div>
 
 
-    <div class="modal fade" id="{{image.name}}{{image.id}}" tabindex="-1" role="dialog"
-        aria-labelledby="examplemodal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <span class="close">&times;</span>
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-center" id="modaltitle">{{image.name}}</h4>
-                    <p>{{image.description}}</p>
+        <div class="modal fade" id="{{image.name}}{{image.id}}" tabindex="-1" role="dialog"
+            aria-labelledby="examplemodal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <span class="close">&times;</span>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center" id="modaltitle">{{image.name}}</h4>
+                        <p>{{image.description}}</p>
 
-                </div>
-                <div class="modal-body text-center">
-                    <img src="{{image.image.url}}" alt="" width="100%" height="100%">
-                </div>
-                <div class="modal-footer">
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="{{image.image.url}}" alt="" width="100%" height="100%">
+                    </div>
+                    <div class="modal-footer">
 
-                    <div class="form-group row">
-                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 padding-1">
-                            <input id="{{image.id}}-url" class="form-control input-md responsive" type="text"
-                                value="{{image.image.url}}">
+                        <div class="form-group row">
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 padding-1">
+                                <input id="{{image.id}}-url" class="form-control input-md responsive" type="text"
+                                    value="{{image.image.url}}">
+                            </div>
+
+
+                            <span class="col-xs-2 col-sm-2 col-md-2 col-lg-2 padding-2">
+                                <button class="btn btn-sm btn-info"
+                                    onclick="copyToClipboard('#{{image.id}}-url')">Copy</button>
+                            </span>
                         </div>
 
 
-                        <span class="col-xs-2 col-sm-2 col-md-2 col-lg-2 padding-2">
-                            <button class="btn btn-sm btn-info"
-                                onclick="copyToClipboard('#{{image.id}}-url')">Copy</button>
-                        </span>
+                        <span>Location:{{image.image_location}}</span>
+                        <span>Category:{{image.image_category}}</span>
+                        <button type="button" class="btn btn-sm btn-outline-info" data-dismiss="modal"></button>
+
                     </div>
-
-
-                    <span>Location:{{image.image_location}}</span>
-                    <span>Category:{{image.image_category}}</span>
-                    <button type="button" class="btn btn-sm btn-outline-info" data-dismiss="modal"></button>
-
                 </div>
             </div>
         </div>
+
+
+        {% endfor %}
+        <!-- modal -->
     </div>
-
-
-    {% endfor %}
-    <!-- modal -->
-</div>
 </div>
 
 
