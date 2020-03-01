@@ -65,6 +65,7 @@ Open the application on your browser `127.0.0.1:8000`.
 If you have any question or contributions, please email me at [chepkiruibetty64@gmail.com] 
 
 ## Codebeat
+ [![codebeat badge](https://codebeat.co/badges/c353b381-11bd-47dd-9da3-18e5fedd358e)](https://codebeat.co/projects/github-com-chepkiruibetty-gallery-inn-master)
 
 
 ## License
